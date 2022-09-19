@@ -1,6 +1,8 @@
 class_name InputHandler
 
-var ObjectUtils = preload("res://godot-libs/libs/utils/object_utils.gd")
+var ObjectUtils = preload("res://godot-libs/sub.gd.utils/object_utils.gd")
+var CameraMovement = \
+	preload("res://godot-libs/sub.gd.input-handler/extra/camera_movement.gd")
 
 var deadzone:float = 0.10 setget set_deadzone, get_deadzone
 var disable_wasd:bool = false setget set_disable_wasd, get_disable_wasd
@@ -56,7 +58,7 @@ func up() -> bool:
 	if(Input.is_physical_key_pressed(KEY_UP) && !self.disable_arrows):
 		return true
 	
-	# The minus is very important xD
+	# The minus is very important
 	if(Input.get_joy_axis(0, JOY_AXIS_1) < -self.deadzone && \
 			!self.disable_joystick):
 		return true
