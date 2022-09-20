@@ -77,11 +77,58 @@ func down() -> bool:
 		return true
 	return false
 
+
+# Return the strength of the move left action
+func strength_left(device:int=0) -> float:
+	if(Input.is_physical_key_pressed(KEY_A) && !self.disable_wasd):
+		return -1.0
+	if(Input.is_physical_key_pressed(KEY_LEFT) && !self.disable_arrows):
+		return -1.0
+	# Joystick
+	if(Input.get_joy_axis(device, JOY_AXIS_0) < -self.deadzone && \
+			!self.disable_joystick):
+		return Input.get_joy_axis(device, JOY_AXIS_0)
+	return 0.0
+
+func strength_right(device:int=0) -> float:
+	if(Input.is_physical_key_pressed(KEY_D) && !self.disable_wasd):
+		return -1.0
+	if(Input.is_physical_key_pressed(KEY_RIGHT) && !self.disable_arrows):
+		return -1.0
+	# Joystick
+	if(Input.get_joy_axis(device, JOY_AXIS_0) > self.deadzone && \
+			!self.disable_joystick):
+		return Input.get_joy_axis(device, JOY_AXIS_0)
+	return 0.0
+
+func strength_down(device:int=0) -> float:
+	if(Input.is_physical_key_pressed(KEY_S) && !self.disable_wasd):
+		return -1.0
+	if(Input.is_physical_key_pressed(KEY_DOWN) && !self.disable_arrows):
+		return -1.0
+	# Joystick
+	if(Input.get_joy_axis(device, JOY_AXIS_1) > self.deadzone && \
+			!self.disable_joystick):
+		return Input.get_joy_axis(device, JOY_AXIS_1)
+	return 0.0
+
+func strength_up(device:int=0) -> float:
+	if(Input.is_physical_key_pressed(KEY_W) && !self.disable_wasd):
+		return -1.0
+	if(Input.is_physical_key_pressed(KEY_UP) && !self.disable_arrows):
+		return -1.0
+	# Joystick
+	if(Input.get_joy_axis(device, JOY_AXIS_1) < -self.deadzone && \
+			!self.disable_joystick):
+		return Input.get_joy_axis(device, JOY_AXIS_1)
+	return 0.0
+
 # Setget deadzone
 func set_deadzone(value:float) -> void:
 	deadzone = value
 func get_deadzone() -> float:
 	return deadzone
+
 
 # Setget disable_wasd
 func set_disable_wasd(value:bool) -> void:
